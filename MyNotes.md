@@ -1,0 +1,1 @@
+1. Para instalar as dependências especificadas no package.json, executei "yarn install"
