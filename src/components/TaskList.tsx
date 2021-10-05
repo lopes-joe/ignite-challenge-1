@@ -11,11 +11,18 @@ interface Task {
 export function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
+  
+  function generateRandomNumber(){
+    const random = Math.random() * 100000
+    const round = Math.round(random)
+    return round 
+  }
 
   function handleCreateNewTask() {
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
+    const uniqueNumber = generateRandomNumber()
     const newTask : Task = {
-        id: 1,
+        id: uniqueNumber,
         title: newTaskTitle,
         isComplete: false
     }
