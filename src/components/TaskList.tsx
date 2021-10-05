@@ -13,7 +13,7 @@ export function TaskList() {
   const [newTaskTitle, setNewTaskTitle] = useState('');
   
   function generateRandomNumber(){
-    const random = Math.random() * 100000
+    const random = Math.random() * 1000000
     const round = Math.round(random)
     return round 
   }
@@ -31,12 +31,16 @@ export function TaskList() {
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
+    tasks.forEach((task : Task)=>{
+      if(task.id == id){
+        setTasks
+        task.isComplete = !task.isComplete
+      }
+    })
   }
-
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
   }
-
   return (
     <section className="task-list container">
       <header>
