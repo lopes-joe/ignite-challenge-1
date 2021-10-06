@@ -57,7 +57,6 @@ export function TaskList() {
           </button>
         </div>
       </header>
-
       <main>
         <ul>
           {tasks.map(task => (
@@ -74,13 +73,11 @@ export function TaskList() {
                 </label>
                 <p>{task.title}</p>
               </div>
-
               <button type="button" data-testid="remove-task-button" onClick={() => handleRemoveTask(task.id)}>
                 <FiTrash size={16}/>
               </button>
             </li>
           ))}
-          
         </ul>
       </main>
     </section>
