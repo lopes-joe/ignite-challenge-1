@@ -11,25 +11,36 @@ interface Task {
 export function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
+  
+  function generateRandomNumber(){
+    const random = Math.random() * 1000000
+    const round = Math.round(random)
+    return round 
+  }
 
   function handleCreateNewTask() {
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
-    const newTask : Task = {
-        id: 1,
+      const uniqueNumber = generateRandomNumber()
+      const newTask : Task = {
+        id: uniqueNumber,
         title: newTaskTitle,
         isComplete: false
     }
-    setTasks([...tasks, newTask])
+    newTask.title ? setTasks([...tasks, newTask]) : false
+    setNewTaskTitle('')
   }
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
+    setTasks(tasks.map((task : Task)=>{
+      task.id == id ? task.isComplete = !task.isComplete : false
+      return task
+    }))
   }
-
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
+    setTasks(tasks.filter((task : Task)=>{return task.id != id}))
   }
-
   return (
     <section className="task-list container">
       <header>
@@ -47,7 +58,6 @@ export function TaskList() {
           </button>
         </div>
       </header>
-
       <main>
         <ul>
           {tasks.map(task => (
@@ -64,13 +74,11 @@ export function TaskList() {
                 </label>
                 <p>{task.title}</p>
               </div>
-
               <button type="button" data-testid="remove-task-button" onClick={() => handleRemoveTask(task.id)}>
                 <FiTrash size={16}/>
               </button>
             </li>
           ))}
-          
         </ul>
       </main>
     </section>
